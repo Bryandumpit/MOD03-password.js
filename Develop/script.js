@@ -37,11 +37,53 @@ var passwordLength = function() {
   }
 };
 
-var chartype;
+//prompt user for which character types to include
+
+var charSet={
+  lowerCase: "abcdefghijklmnopqrstuvwxyz",
+  upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  numeric: "0123456789",
+  symbols: "~`!@#$%^&*()-_+={}[]|:;'<>,.?",
+
+}
 
 var passwordCharType = function () {
-  
-}
+  var passwordCharSet = "";
+
+  var lower = window.confirm("Would you like to use lowercase letters?");
+  if (lower) {
+      passwordCharSet += charSet.lowerCase;
+  };
+
+  var upper = window.confirm("Would you like to use uppercase letters?");
+  if (upper) {
+      passwordCharSet += charSet.upperCase;
+  };
+
+  var symbols = window.confirm("Would you like to use symbols?");
+  if (symbols) {
+      passwordCharSet += charSet.symbols;
+  };
+
+  var numeric = window.confirm("Would you like to use numbers?");
+  if (numeric) {
+      passwordCharSet += charSet.numeric;
+  };
+
+  //validate
+  if (lower || upper || symbols || numeric) {
+    var pass = "";
+    for (let i = 0; i < length-1; i++) {
+    pass += passwordCharSet[Math.floor(Math.random() * length)]
+    }
+    
+  } else{
+        window.alert ("Please select at least one of lowercase, uppercase, symbols and/or numbers")
+        passwordCharType();
+    }
+    //confirms a password is generated based on conditions above
+    console.log (pass);
+};
 
 
 
@@ -49,12 +91,13 @@ var passwordCharType = function () {
 
 var generatePassword = function() {
   passwordLength();
+  passwordCharType();
+
+  
 
 
 
-
-  //this line confirms, length can be referenced from a passwordLength()
-  console.log(length);
+  
   
 };
 
@@ -66,6 +109,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
