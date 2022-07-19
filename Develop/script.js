@@ -22,20 +22,42 @@ password is then displayed by alert or in the textarea #password.
 //special characters: ~`!@#$%^&*()-_+={}[]|:;'<>,.?
 
 //prompts user for password length
-var passLength = function(){
-  var length = window.prompt ("Please indicate the length of the password from 8 to 128 characters?")
-  if (length<8 || length>128){
-    window.alert("Please select a valid length from 8 to 128 characters");
-    return passLength();
-  } else{
+var length;
+
+var passwordLength = function() {
+  length = window.prompt("Please indicate how long the password should be from 8 to 128 characters.")
+
+  if (length<8 || length>128) {
+    window.alert("Please provide a valid length for your password from 8 to 128 characters.");
+    passwordLength();
+  }
+
+  if (length>8 && length <128) {
       return length;
   }
+};
+
+var chartype;
+
+var passwordCharType = function () {
+  
 }
 
+
+
 //placeholder task for generatePassword() 
+
 var generatePassword = function() {
-  console.log("Hello!")
-}
+  passwordLength();
+
+
+
+
+  //this line confirms, length can be referenced from a passwordLength()
+  console.log(length);
+  
+};
+
 
 
 
@@ -44,9 +66,6 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  passLength();
-  console.log(length);
-  
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
