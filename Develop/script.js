@@ -23,6 +23,7 @@ password is then displayed by alert or in the textarea #password.
 
 //prompts user for password length
 var length;
+var pass;
 
 var passwordLength = function() {
   length = window.prompt("Please indicate how long the password should be from 8 to 128 characters.")
@@ -70,11 +71,13 @@ var passwordCharType = function () {
       passwordCharSet += charSet.numeric;
   };
 
-  //validate
+  
+  //validate and concatenate
   if (lower || upper || symbols || numeric) {
-    var pass = "";
-    for (let i = 0; i < length-1; i++) {
-    pass += passwordCharSet[Math.floor(Math.random() * length)]
+    pass = "";
+    
+    for (var i = 0; i < length; i++) {
+    pass += passwordCharSet[Math.floor(Math.random() * passwordCharSet.length)]
     }
     
   } else{
@@ -82,7 +85,8 @@ var passwordCharType = function () {
         passwordCharType();
     }
     //confirms a password is generated based on conditions above
-    console.log (pass);
+   return pass;
+
 };
 
 
@@ -92,13 +96,7 @@ var passwordCharType = function () {
 var generatePassword = function() {
   passwordLength();
   passwordCharType();
-
-  
-
-
-
-  
-  
+  return pass; 
 };
 
 
@@ -117,6 +115,6 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+// Add event listener to generate button: upon click, runs writePassword
 generateBtn.addEventListener("click", writePassword);
 
